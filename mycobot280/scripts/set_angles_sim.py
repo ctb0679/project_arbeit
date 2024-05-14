@@ -1,22 +1,25 @@
+#!/usr/bin/env python3
+
 import rospy
 from sensor_msgs.msg import JointState
 from std_msgs.msg import Header
 
 # Define the number of steps for interpolation
-NUM_STEPS = 1000
+NUM_STEPS = 100
 
-def publish_joint_states(msg):
+def publish_joint_states():
 
     pub = rospy.Publisher('/joint_states', JointState, queue_size=10)
-    rate = rospy.Rate(0.1)
+    rate = rospy.Rate(60)
 
     joint_state = JointState()
     joint_state.header = Header()
     sequence = 0
     
     # Define the initial and desired joint angles
-    initial_positions = msg.position
-    desired_positions = [0.0, 0.0, 1.7, -1, -2, -2.5]
+    initial_msg = rospy.wait_for_message('/joint_states', JointState, timeout=5)
+    initial_positions = initial_msg.position
+    desired_positions = [1.0, 0.0, 1.7, -1, -2, -2.5]
 
     while not rospy.is_shutdown():
         # Interpolate joint angles  
@@ -40,14 +43,14 @@ def publish_joint_states(msg):
         
         sequence += 1
         if sequence > NUM_STEPS:
-            initial_positions = desired_positions 
-            break # Update initial positions
+            initial_positions = desired_positions  # Update initial positions
 
         rate.sleep()
 
 if __name__ == '__main__':
     try:
-        rospy.init_node('joint_state_publisher')
-        rospy.Subscriber('/joint_states', JointState, publish_joint_states)
+        rospy.init_node('joint_state_publisher', anonymous=True)
+        #rospy.Subscriber('/joint_states', JointState, publish_joint_states)
+        publish_joint_states()
     except rospy.ROSInterruptException:
         pass
