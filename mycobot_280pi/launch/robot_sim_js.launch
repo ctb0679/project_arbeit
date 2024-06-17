@@ -1,0 +1,19 @@
+<launch>
+
+    <include file="$(find mycobot_communication)/launch/communication_topic_pi.launch"/>
+
+	<arg name="model" default="$(find mycobot_description)/urdf/mycobot_pi/mycobot_urdf.urdf"/>
+	<arg name="rvizconfig" default="$(find mycobot_280pi)/config/mycobot.rviz" />
+	<arg name="gui" default="false" />
+
+	<param name="robot_description" command="$(find xacro)/xacro --inorder $(arg model)" />
+
+	<!-- Combinejoin values to TF ，将值合并到TF-->
+	<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+	<!-- Show in Rviz ，显示在Rviz-->
+	<node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true" />
+
+
+	<!-- listen and pub the real angles to the sim，监听并发布真实角度-->
+	<node name="js_publisher" pkg="mycobot_280pi" type="set_angles_sim.py" />
+</launch>
