@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import rospy
+import numpy as np
 from sensor_msgs.msg import JointState
 from std_msgs.msg import Header
 
@@ -19,7 +20,7 @@ def publish_joint_states():
     # Define the initial and desired joint angles
     initial_msg = rospy.wait_for_message('/joint_states', JointState, timeout=5)
     initial_positions = initial_msg.position
-    desired_positions = [1.0, 0.0, 1.7, -1, -2, -2.5]
+    desired_positions = [0.0, -np.pi/2, 0.0, 0.0, 0.0, 0.0]
 
     while not rospy.is_shutdown():
         # Interpolate joint angles  
