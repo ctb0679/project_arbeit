@@ -1,0 +1,9 @@
+<launch>
+
+    <include file="$(find mycobot_communication)/launch/communication_topic_pi.launch"/>
+
+    <include file="$(find usb_cam)/launch/usb_cam-test.launch"/>
+
+	<node name="FK_node" pkg="kinematics" type="forward_kinematics.py" />
+
+</launch>

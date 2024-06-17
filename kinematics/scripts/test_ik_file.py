@@ -14,7 +14,7 @@ NUM_STEPS = 100
 def calculate_ik():
 
     pub = rospy.Publisher('/inverse_ik_js', JointState, queue_size=10)
-    rate = rospy.Rate(60)
+    rate = rospy.Rate(10)
 
     joint_state = JointState()
     joint_state.header = Header()
@@ -31,15 +31,13 @@ def calculate_ik():
     print("Calculating joint states.....")
 
     target_js = incremental_ik(initial_positions, np.array(target_pose_matrix))
-    
-    calculated_point = T_lamb(*(target_js))
+    joint_state.position = target_js
 
-    print(target_pose_matrix)    
+    print(target_js)    
     print()
-    print(calculated_point)  
-    #rospy.loginfo()
 
-    #rate.sleep()
+    pub.publish(joint_state)
+    rate.sleep()
 
 if __name__ == '__main__':
     try:
