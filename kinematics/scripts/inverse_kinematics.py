@@ -8,6 +8,7 @@ from symb_mat_read import *
 limits = [[-np.radians(165), np.radians(165)], [-np.radians(165), np.radians(165)], [-np.radians(165), np.radians(165)], 
           [-np.radians(165), np.radians(165)], [-np.radians(165), np.radians(165)], [-np.radians(175), np.radians(175)]]
 
+
 #Function to create a random starting point for IK if the provided one doesn't work
 def generate_random_vector():
     random_vector = []
@@ -52,6 +53,7 @@ def incremental_ik(init_joint_state, goal, steps = 1000, tol=0.001):
 
         error = goal_pose - current_pose
         i=0
+
         while np.max(np.abs(error)) > tol and i<steps:
 
             J_current = J_lamb(*(q_current))

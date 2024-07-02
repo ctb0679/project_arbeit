@@ -4,7 +4,7 @@ import numpy as np
 
 a = np.array([0, -0.1104, -0.096, 0, 0, 0])
 d = np.array([0.13122, 0, 0, 0.0634, 0.07505, 0.0456])
-alpha = np.pi/2*np.array([1, 0, 0, 1, -1, 0])
+alpha = np.array([np.pi/2, 0, 0, np.pi/2, -np.pi/2, 0])
 
 #build transformation matrix (j-1)Tj, which describes frame j in frame j-1
 def build_singlestep_iTj(i,theta_i):
