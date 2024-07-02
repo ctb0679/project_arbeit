@@ -23,7 +23,7 @@ def build_iTj_symb(i,j,theta):
 
 
 theta1,theta2,theta3,theta4,theta5,theta6 = sp.symbols('theta1 theta2 theta3 theta4 theta5 theta6')
-# theta = [0,0,0,0,np.pi,0,0]
+# theta = [0,0,0,0,np.pi,0]
 
 T_0_6_symb = build_iTj_symb(0,6,[theta1,theta2,theta3,theta4,theta5,theta6])
 # print(T_0_6_symb)

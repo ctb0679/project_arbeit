@@ -5,16 +5,16 @@ import rospy
 import numpy as np
 from sensor_msgs.msg import JointState
 from std_msgs.msg import Float64MultiArray
+from pose_and_matrix_tf import extract_translation_and_rotation
 
 
 pub = rospy.Publisher('fk_matrix', Float64MultiArray, queue_size=10)
 
 def js_callback(data):
 
-    rate = rospy.Rate(10)
+    rate = rospy.Rate(70)
 
     joint_angles = np.around(data.position, decimals=5)
-    # print(joint_angles)
 
     joint_offsets = [0, -np.pi/2, 0, -np.pi/2, np.pi/2, 0]
 
@@ -26,14 +26,17 @@ def js_callback(data):
     final_tf = Float64MultiArray()
     final_tf.data = trans_mat_final.flatten().tolist()
 
-    rospy.loginfo(final_tf)
+    pose_vec = extract_translation_and_rotation(trans_mat_final)
+    print(pose_vec)
+
+    #rospy.loginfo(final_tf)
     pub.publish(final_tf)
     rate.sleep()
 
 
 def listener():
     rospy.init_node("FK_node", anonymous=True)
-    rospy.Subscriber("joint_states", JointState, js_callback, queue_size=10)
+    rospy.Subscriber("joint_states", JointState, js_callback)
     rospy.spin()
 
 

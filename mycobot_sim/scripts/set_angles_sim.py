@@ -20,7 +20,8 @@ def publish_joint_states():
     # Define the initial and desired joint angles
     initial_msg = rospy.wait_for_message('/joint_states', JointState, timeout=5)
     initial_positions = initial_msg.position
-    desired_positions = [0.0, -np.pi/2, 0.0, 0.0, 0.0, 0.0]
+    desired_positions = [2.326991354714245, 0.3913173844007911, 0.8667142257435856, 1.5725109895718088, -2.0277781473196708, 2.3648425211936726]
+
 
     while not rospy.is_shutdown():
         # Interpolate joint angles  

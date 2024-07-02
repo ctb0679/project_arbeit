@@ -4,8 +4,6 @@ import numpy as np
 from math import acos, atan2, sqrt
 
 def calculate_transformation_matrix(translation_vector, rotation_angles):
-    # Convert rotation angles to radians
-    rotation_angles = np.radians(rotation_angles)
 
     # Extract rotation angles for each axis
     theta_x, theta_y, theta_z = rotation_angles
