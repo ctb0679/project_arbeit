@@ -8,14 +8,14 @@
     <visual>
       <geometry>
 	     <!--- 0.0 0 -0.04  1.5708 3.14159-->
-       <mesh filename="package://mycobot_description/urdf/280_arduino/joint1.dae"/>
+       <box size="0.01 0.01 0.01"/>
       </geometry>
       <origin xyz = "0.0 0 0 " rpy = " 0 0 -1.5708"/>
     </visual>
     <collision>
       <geometry>
 	     <!--- 0.0 0 -0.04  1.5708 3.14159-->
-       <mesh filename="package://mycobot_description/urdf/280_arduino/joint1.dae"/>
+       <box size="0.01 0.01 0.01"/>
         </geometry>
         <origin xyz = "0.0 0 0 " rpy = " 0 0 -1.5708"/>
     </collision>
@@ -24,13 +24,13 @@
   <link name="joint2">
     <visual>
       <geometry>
-       <mesh filename="package://mycobot_description/urdf/280_arduino/joint2.dae"/>
+       <box size="0.01 0.01 0.01"/>
       </geometry>
       <origin xyz = "0.0 0 -0.06096 " rpy = " 0 0 -1.5708"/>
     </visual>
     <collision>
      <geometry>
-       <mesh filename="package://mycobot_description/urdf/280_arduino/joint2.dae"/>
+       <box size="0.01 0.01 0.01"/>
       </geometry>
       <origin xyz = "0.0 0 -0.06096 " rpy = " 0 0 -1.5708"/>
     </collision>
@@ -40,13 +40,13 @@
   <link name="joint3">
     <visual>
       <geometry>
-       <mesh filename="package://mycobot_description/urdf/280_arduino/joint3.dae"/>
+       <box size="0.01 0.01 0.01"/>
       </geometry>
     <origin xyz = "0.0 0 0.03256 " rpy = " 0 -1.5708 0"/>
     </visual>
     <collision>
       <geometry>
-       <mesh filename="package://mycobot_description/urdf/280_arduino/joint3.dae"/>
+       <box size="0.01 0.01 0.01"/>
       </geometry>
       <origin xyz = "0.0 0 0.03256 " rpy = " 0 -1.5708 0"/>
     </collision>
@@ -57,14 +57,14 @@
     <visual>
       <geometry>
        <!--- 0.0 0 -0.04 -->
-       <mesh filename="package://mycobot_description/urdf/280_arduino/joint4.dae"/>
+       <box size="0.01 0.01 0.01"/>
       </geometry>
       <origin xyz = "0.0 0 0.03056 " rpy = " 0 -1.5708 0"/>
     </visual>
     <collision>
       <geometry>
        <!--- 0.0 0 -0.04 -->
-       <mesh filename="package://mycobot_description/urdf/280_arduino/joint4.dae"/>
+       <box size="0.01 0.01 0.01"/>
       </geometry>
       <origin xyz = "0.0 0 0.03056 " rpy = " 0 -1.5708 0"/>
     </collision>
@@ -75,14 +75,14 @@
     <visual>
       <geometry>
        <!--- 0.0 0 -0.04 -->
-       <mesh filename="package://mycobot_description/urdf/280_arduino/joint5.dae"/>
+       <box size="0.01 0.01 0.01"/>
       </geometry>
     <origin xyz = "0.0 0 -0.03356 " rpy = " -1.5708 0 0"/>
     </visual>
     <collision>
        <geometry>
        <!--- 0.0 0 -0.04 -->
-       <mesh filename="package://mycobot_description/urdf/280_arduino/joint5.dae"/>
+       <box size="0.01 0.01 0.01"/>
       </geometry>
       <origin xyz = "0.0 0 -0.03356 " rpy = " -1.5708 0 0"/>
     </collision>
@@ -93,14 +93,14 @@
     <visual>
       <geometry>
        <!--- 0.0 0 -0.04 -->
-       <mesh filename="package://mycobot_description/urdf/280_arduino/joint6.dae"/>
+       <box size="0.01 0.01 0.01"/>
       </geometry>
     <origin xyz = "0 0.00 -0.038 " rpy = " 0 0 0"/>
     </visual>
     <collision>
       <geometry>
        <!--- 0.0 0 -0.04 -->
-       <mesh filename="package://mycobot_description/urdf/280_arduino/joint6.dae"/>
+       <box size="0.01 0.01 0.01"/>
       </geometry>
     <origin xyz = "0 0.00 -0.038 " rpy = " 0 0 0"/>
     </collision>
@@ -111,28 +111,17 @@
     <visual>
       <geometry>
        <!--- 0.0 0 -0.04 -->
-       <mesh filename="package://mycobot_description/urdf/280_arduino/joint7.dae"/>
+       <box size="0.01 0.01 0.01"/>
       </geometry>
     <origin xyz = "0.0 0 -0.012 " rpy = " 0 0 0"/>
     </visual>
     <collision>
       <geometry>
        <!--- 0.0 0 -0.04 -->
-       <mesh filename="package://mycobot_description/urdf/280_arduino/joint7.dae"/>
+       <box size="0.01 0.01 0.01"/>
       </geometry>
     <origin xyz = "0.0 0 -0.012 " rpy = " 0 0 0"/>
     </collision>
-  </link>
-
-  <link name="apriltag">
-    <visual>
-      <geometry>
-        <box size="0.2 0.2 0.01"/> <!-- Tag dimensions -->
-      </geometry>
-      <material>
-        <texture filename="package://apriltag_ros/apriltags/tag36_11_00000.png"/> <!-- AprilTag image -->
-      </material>
-    </visual>
   </link>
 
 
@@ -189,12 +178,6 @@
     <parent link="joint6"/>
     <child link="joint6_flange"/>
     <origin xyz= "0 0.0456 0" rpy = "-1.5708 0 0"/>  
-  </joint>
-
-  <joint name="apriltag_joint" type="fixed">
-    <parent link="base_link"/>
-    <child link="apriltag"/>
-    <origin xyz="1.0 0.5 0.1" rpy="0 0 0"/> <!-- Position and orientation -->
   </joint>
 
 </robot>

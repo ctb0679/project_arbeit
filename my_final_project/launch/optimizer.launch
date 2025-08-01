@@ -1,0 +1,21 @@
+<launch>
+    <!-- Existing nodes -->
+    <arg name="model" default="$(find mycobot_description)/urdf/mycobot/mycobot_urdf.urdf"/>
+    <arg name="rvizconfig" default="$(find mycobot_280pi)/config/mycobot.rviz" />
+    <arg name="gui" default="true" />
+
+    <param name="robot_description" command="$(find xacro)/xacro --inorder $(arg model)" />
+
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+        <param name="use_gui" value="$(arg gui)" />
+    </node>
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true" />
+    
+    <!-- FK Node (Required for error calculation) -->
+    <node name="fk_node" pkg="kinematics" type="forward_kinematics_sim.py" />
+    
+    <!-- Wall-Aligned Base Optimizer -->
+    <node name="base_optimizer" pkg="my_final_project" 
+          type="base_optimizer.py" output="screen" />
+</launch>

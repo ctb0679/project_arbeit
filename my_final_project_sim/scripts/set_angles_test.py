@@ -19,11 +19,11 @@ def publish_joint_states():
     
     # Define the initial and desired joint angles
     initial_msg = rospy.wait_for_message('/joint_states', JointState, timeout=5)
-    # initial_positions = [0.0, 0.523599, 2.0944, -2.61799, 3.14, 0.0]
-    initial_positions = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
-    # initial_positions = [0.0, 1.0472, 1.5708, -2.61799, 3.14, 0.0]
-    # desired_positions = [2.52897480e-01,  4.85718905e-01,  1.85347273e+00, -2.34022830e+00, 2.87979327e+00, -2.61922847e-04]
-    desired_positions = [0.0, 0.523599, 2.0944, -2.61799, 3.14, 0.0]
+    initial_positions = initial_msg.position
+    # desired_positions = [2.326991354714245, 0.3913173844007911, 0.8667142257435856, 1.5725109895718088, -2.0277781473196708, 2.3648425211936726]
+    # ✅ Wait for the next desired joint state
+    desired_msg = rospy.wait_for_message('/desired_joint_states', JointState)
+    desired_positions = np.array(desired_msg.position)
 
     while not rospy.is_shutdown():
         # Interpolate joint angles  
@@ -47,9 +47,12 @@ def publish_joint_states():
         
         sequence += 1
         if sequence > NUM_STEPS:
-            initial_positions = desired_positions  # Update initial positions
+            initial_positions = desired_positions
+            desired_msg = rospy.wait_for_message('/desired_joint_states', JointState)
+            desired_positions = np.array(desired_msg.position)
+            sequence = 0
 
-        rate.sleep()
+        rate.sleep(5.0)
 
 if __name__ == '__main__':
     try:
