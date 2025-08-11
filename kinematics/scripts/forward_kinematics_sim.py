@@ -14,8 +14,11 @@ def js_callback(data):
 
     rate = rospy.Rate(70)
 
-    joint_angles = np.around(data.position, decimals=5)
+    # joint_angles = np.around(data.position, decimals=5)
 
+    joint_angles = [0, -np.pi/2, 0, np.pi/2, 0, 0]
+    # joint_angles = [0.0, 1.0472, 1.5708, -2.61799, 3.14, 0.0]
+    # joint_angles = [0.0, 0.523599, 2.0944, -2.61799, 3.14, 0.0]
     joint_offsets = [0, -np.pi/2, 0, -np.pi/2, np.pi/2, 0]
 
     for i in range(len(joint_angles)):
