@@ -14,7 +14,7 @@ from symb_mat_read import T_lamb
 # ----- Configuration parameters -----
 BASE_RESOLUTION = 0.1      # Base position grid resolution in meters (e.g., 0.1 m)
 YAW_STEP_DEG = 45.0        # Base orientation sampling step in degrees (e.g., 45°)
-SAMPLE_POSE_COUNT = 100    # Number of end-effector poses to sample from reachability map
+SAMPLE_POSE_COUNT = 10    # Number of end-effector poses to sample from reachability map
 OUTPUT_CSV = False         # Whether to export results to CSV files
 OUTPUT_JSON = False        # Whether to export results to a JSON file
 

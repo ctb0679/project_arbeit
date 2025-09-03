@@ -5,7 +5,7 @@
     <arg name="gui" default="true" />
     
     <!-- New parameters for reachability map -->
-    <arg name="map_path" default="$(find sampled_reachability_map)/maps/3D_reach_map_0.03_2025-08-14-15-31-51.h5"/>
+    <arg name="map_path" default="$(find sampled_reachability_map)/maps/filt_3D_reach_map_joint6_flange_torso_False_0.02_2025-09-03-18-13-13.h5"/>
     <arg name="show_poses" default="false"/>
     
     <param name="robot_description" command="$(find xacro)/xacro --inorder $(arg model)" />
