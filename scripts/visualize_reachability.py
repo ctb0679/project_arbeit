@@ -17,20 +17,32 @@ def create_reachability_marker(spheres, resolution):
     marker.scale = Vector3(resolution, resolution, resolution)
     marker.lifetime = rospy.Duration(0)  # Persistent marker
     
+
+    # --- NEW: compute normalization range for reachability ---
+    reach_vals = spheres[:, 3]
+    reach_min = float(np.min(reach_vals))
+    reach_max = float(np.max(reach_vals))
+    eps = 1e-9
+    rospy.loginfo(f"Reachability raw range: {reach_min} .. {reach_max}")
+
     # Downsample for better performance
     if len(spheres) > 10000:
         spheres = spheres[np.random.choice(len(spheres), 10000, replace=False)]
-    
+
     for sphere in spheres:
-        pos, reachability = sphere[:3], sphere[3]
+        pos, raw_reach = sphere[:3], sphere[3]
         marker.points.append(Point(*pos))
-        
+
+        # --- NEW: normalize to 0–100 ---
+        norm = (raw_reach - reach_min) / (reach_max - reach_min + eps)  # 0..1
+        reachability = 100.0 * np.clip(norm, 0.0, 1.0)                  # 0..100
+
         # Color gradient: red (0%) -> yellow (50%) -> green (100%)
-        r = min(2.0 * (1 - reachability/100), 1.0)
-        g = min(2.0 * (reachability/100), 1.0)
-        color = ColorRGBA(r, g, 0, 0.6)  # Semi-transparent
+        r = min(max(2.0 * (1.0 - reachability / 100.0), 0.0), 1.0)
+        g = min(max(2.0 * (reachability / 100.0), 0.0), 1.0)
+        color = ColorRGBA(r, g, 0.0, 0.6)
         marker.colors.append(color)
-    
+
     return marker
 
 def create_pose_markers(poses):

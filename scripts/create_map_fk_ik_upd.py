@@ -225,7 +225,7 @@ def is_pose_reachable(query_pos, query_ori, fk_tree, fk_orientations, joint_samp
         return False
     
     # 2. Broad FK filter
-    cos_half_ori_tol = math.cos(math.radians(ori_tol_deg)) / 2.0
+    cos_half_ori_tol = math.cos(math.radians(ori_tol_deg) / 2.0)
     close_indices = fk_tree.query_ball_point(query_pos, r=pos_tol)
     
     # Vectorized orientation check
