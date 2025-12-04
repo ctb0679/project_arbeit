@@ -22,7 +22,7 @@ def publish_joint_states():
 
     # Load waypoints from text file (comma-separated values)
     waypoints = []
-    waypoint_file_path = '/home/junaidali/inspection_ws/src/scientific-working-ss-2024/my_final_project_sim/generated_joint_states_test.txt'  # <-- Replace this with actual path
+    waypoint_file_path = '/home/idac/Junaidali/catkin_ws/src/project_arbeit/my_final_project_sim/generated_joint_states_02.12.txt'  # <-- Replace this with actual path
 
     with open(waypoint_file_path, 'r') as f:
         for line in f:

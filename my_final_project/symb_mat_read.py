@@ -15,7 +15,7 @@ def find_file_directory(file_name, start_directory):
     return None
 
 username = getpass.getuser()
-symb_dir = find_file_directory('symb_jacobian.txt', ("/home/"+username+"/Junaidali/catkin_ws/src/"))
+symb_dir = find_file_directory('symb_jacobian.txt', ("/home/"+username+"/inspection_ws/src/"))
 
 
 with open((symb_dir + "/symb_jacobian.txt"), "r") as inf:
