@@ -42,7 +42,7 @@ parser.add_argument("--map_pkl", type=str, required=True, help="Filename (with p
 args, unknown = parser.parse_known_args()
 reach_map_file_path = os.path.dirname(args.map_pkl)+'/'
 reach_map_file_name = os.path.basename(args.map_pkl)
-inv_reach_map_file_name = 'inv_' + reach_map_file_name
+inv_reach_map_file_name = 'inv_' + reach_map_file_name + datetime.now()
 
 
 t0 = time.perf_counter()

@@ -23,7 +23,7 @@ else:
 dtype = torch.float32  # Choose float32 or 64 etc.
 
 ## Settings for the reachability map:
-robot_urdf = "mycobot_expanded.urdf"     # <-- expanded URDF (no xacro tags)
+robot_urdf = "/home/idac/Junaidali/catkin_ws/src/sampled_reachability_map/scripts/mycobot_expanded.urdf"     # <-- expanded URDF (no xacro tags)
 name_end_effector = "joint6_flange"
 name_base_link = "joint1"
 use_torso = False
@@ -48,7 +48,7 @@ assert (len(chain.get_joint_parameter_names()) == n_dof), "Incorrect number of D
 print("...\n...")
 
 # Number of Forward Kinematic solutions to sample
-N_fk = 1000000  # practical start for 6-DOF small arm
+N_fk = 10000000  # practical start for 6-DOF small arm
 
 # Map resolution and limits
 angular_res = np.pi / 8  # 22.5 degrees per bin
@@ -78,7 +78,7 @@ reach_map = torch.zeros((num_voxels, num_values), dtype=dtype, device="cpu")
 print("[Number of 6D Voxels possible (Based on resolution settings)]: " + str(num_voxels))
 
 # Full path and file name to save
-reach_map_file_path = os.getcwd() + '/../maps/'
+reach_map_file_path ='/home/idac/Junaidali/catkin_ws/src/sampled_reachability_map/maps/'
 os.makedirs(reach_map_file_path, exist_ok=True)  # <-- NEW: ensure folder exists
 reach_map_file_name = 'reach_map_' + str(name_end_effector) + '_samples_' + str(N_fk) + '_' + str(cartesian_res) + '_' + datetime.now().strftime('%Y-%m-%d-%H-%M-%S')
 

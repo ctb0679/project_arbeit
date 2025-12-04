@@ -17,7 +17,7 @@ import pdb
 ### NOTE: Requires an inverse reachability map and goal pose as input
 
 # NOTE: For the base map, here we switch to INTRINSIC ZYX (or EXTRINSIC XYZ) Euler angles for easier selection of base points on the ground with no roll and no pitch
-goal_pose = torch.tensor([-0.1488, -0.06333, 0.03874, -np.pi/2, 0, np.pi/2]) # euler angles in INTRINSIC ZYX (radians) TODO: Add quaternion support
+goal_pose = torch.tensor([0.0, 1.0, 0.28, 0.0, -np.pi/2, -np.pi/2]) # euler angles in INTRINSIC ZYX (radians) TODO: Add quaternion support
 ang_thresh = np.pi/8 # threshold for limiting roll and pitch roll angles on the base ground map
 dtype = torch.float32 # Choose float32 or 64 etc.
 use_vis_freq = True # Use Visitation frequency as M_score for 3D map (and not Manipulability)
