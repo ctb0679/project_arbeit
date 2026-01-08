@@ -15,7 +15,7 @@ from moveit_msgs.msg import RobotState as RobotStateMsg
 # ---------------------------------------------------------------------------
 
 # Trajectory file with scan pattern (dy, dx) in mm in the socket frame
-TRAJECTORY_FILE = "/home/idac/Junaidali/catkin_ws/src/project_arbeit/my_final_project_sim/spiral_trajectory_points.txt"
+TRAJECTORY_FILE = "/home/junaidali/catkin_ws/src/project_arbeit/my_final_project_sim/spiral_trajectory_points.txt"
 
 # Socket pose in the cobot base frame (UPDATE with your real values)
 # Socket frame convention:
@@ -222,7 +222,7 @@ def execute_trajectory():
     # ---------------------------------------------------------
     # 2) Open output file and write initial joint state
     # ---------------------------------------------------------
-    output_joint_file = "/home/idac/Junaidali/catkin_ws/src/project_arbeit/my_final_project_sim/generated_joint_states_02.12.txt"
+    output_joint_file = "/home/junaidali/catkin_ws/src/project_arbeit/my_final_project_sim/generated_joint_states_02.12.txt"
     with open(output_joint_file, "w") as f_out:
         rospy.sleep(2.0)
 

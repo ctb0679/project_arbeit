@@ -1,0 +1,64 @@
+First of all, from the bim_element_extraction.py file the position of the socket w.r.t. the current base position is obtained. the robot moves to a position as close as 1 meter from the electrical socket ifc type. 
+now we know the positon of the electrical socket w.r.t. the position of the robot base which then uses the inverse reachability map computed with the help of the reachability map and creates a base placement map (computes the x, y distance the robot has to move to reach the electrical socket easily and gives the top results considering the reachability score). The base of the robot is minimum
+
+z = 140mm
+
+from the ground. 
+
+The electrical sockets are approx. 300mm from the ground. 
+
+plus
+approx. 20mm height of the robot mount
+
+For eg.:
+when the socket is at (0, 1.02, 0.14, 0, -pi/2, +pi/2)
+the goal pose is (0, 1, 0.14, 0, -pi/2, -pi/2)
+base placement gives best as x=0.03, y=0.87 which is correct if we want to reach the goal pose. now here the create_base_placement_....py file actually removes the points beyound the wall filtering them out. it gives 4 parameters x,y, yaw and the score comparing it against the others. 
+
+i.e. now the goal pose is (-0.03, 0.13, 0.14) from the new position
+
+
+
+python3 src/sampled_reachability_map/scripts/create_fk_reachability_map.py 
+
+for reachability map
+
+python3 src/sampled_reachability_map/scripts/invert_reachability_map.py --map_pkl src/sampled_reachability_map/maps/filt_reach_map_joint6_flange_samples_10000000_0.02_2025-12-02-13-41-30.pkl 
+
+inverts the reachability map i.e. computes the inverse transform of all the end-effector poses
+for inverse reachability map
+
+python3 src/sampled_reachability_map/scripts/create_base_placement_map_for_goal_pose.py --inv_map_pkl src/sampled_reachability_map/maps/inv_filt_reach_map_joint6_flange_samples_10000000_0.02_2025-12-02-13-41-30.pkl 
+
+The base placement map can then be obtained by transforming the inverted map based on a given goal pose and slicing the map to intersect with the ground
+for getting the ideal base placement
+this gives the top candidate for the base placement using the reachability score (x, y, yaw, and the reachability score is given)
+
+
+
+generate_trajectory_spiral.py file generates the x y positions the robot has to reach for the inspection of the socket considering the socket center as 0,0 (starting position).
+
+save_pose_main file converts the spiral trajectory points into position and orientation wrt the base of the robot and then stores the generated solutions using inverse kinematics for all the positions the robot has to reach. 
+
+home/junaidali/inspection_ws/src/scientific-working-ss-2024/my_final_project_sim/scripts/final_test_trajectory.py
+this is used to move the cobot in simulation along the planned spiral trajectory.
+it scans the socket
+
+
+just some commands to use
+
+T1: roslaunch mycobot_moveit_config demo.launch 
+T2: rosrun my_final_project_sim save_pose_main.py
+
+Average IK rate along the trajectory: 70 - 85%
+
+
+
+
+test_new.py is used to run the generated joint states on the actual robot 
+but before that 
+
+roslaunch mycobot_280pi teleop_keyboard.launch
+
+mycobot ip: 10.154.67.189
+
